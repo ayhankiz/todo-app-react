@@ -1,0 +1,28 @@
+.form {
+  max-width: 100%;
+}
+
+.form input[type="text"] {
+  max-width: 22.5rem;
+  min-width: 80%;
+
+  border: none;
+  border-radius: 5px;
+
+  padding: 0.75rem 1.25rem;
+  font-size: 1.125rem;
+  outline: 3px solid #202020;
+}
+
+.error {
+  position: absolute;
+  right: -2.25rem;
+  top: 1rem;
+  padding: 1rem 2rem;
+  background-color: white;
+  border: 2px solid hsl(10, 80%, 50%);
+  border-radius: 5px;
+  z-index: -1;
+  opacity: 1;
+  transition: all 0.3s;
+}
