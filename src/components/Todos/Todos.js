@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
 import Input from "../../UI/Input";
 import TodoItem from "./TodoItem";
@@ -12,9 +12,9 @@ const ACTIONS = {
 };
 
 const todosInitalState = {
-  todos: [],
-  activeTodos: [],
-  completedTodos: [],
+  todos: [
+    {todoValue: "test", completed: false, id: 3.123123}
+  ],
 };
 const todosReducer = function (todosState, action) {
   switch (action.type) {
@@ -32,13 +32,6 @@ const todosReducer = function (todosState, action) {
           },
           // 4.) add the previous todos to the todos array
           ...todosState.todos,
-        ],
-        // 5.) Do the same for the active Todos
-        activeTodos: [
-          {
-            ...todosState.todos,
-          },
-          ...todosState.activeTodos,
         ],
       };
     }
@@ -64,20 +57,8 @@ const todosReducer = function (todosState, action) {
       // 6.) replace the clicked todo with the updatedTodo
       updatedTodos[checkedTodoIndex] = updatedTodo;
 
-      // 7.) count the active and completed todos
-      const activeUpdatedTodos = updatedTodos.filter(
-        (todo) => todo.completed === false
-      );
-
-      const completedUpdatedTodos = updatedTodos.filter(
-        (todo) => todo.completed === true
-      );
-
-      // 8.) return the updated state
       return {
         todos: updatedTodos,
-        activeTodos: activeUpdatedTodos,
-        completedTodos: completedUpdatedTodos,
       };
     }
 
@@ -104,7 +85,6 @@ export default function TodosState() {
 
   const storeTodoValue = function (value) {
     dispatchTodos({ type: ACTIONS.ADD_TODO, value: value, completed: false });
-    localStorage.setItem("hasTodos", "1");
   };
 
   const deleteCheckedTodos = function () {
